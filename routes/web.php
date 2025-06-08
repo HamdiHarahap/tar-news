@@ -1,9 +1,15 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\NewsController;
 use App\Models\News;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CategoryController;
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+    return 'Storage linked!';
+});
 
 Route::get('/', function () {
     $trending = News::with('category')->orderBy('id', 'asc')->get();
